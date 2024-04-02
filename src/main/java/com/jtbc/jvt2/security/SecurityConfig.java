@@ -42,11 +42,11 @@ public class SecurityConfig {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.authorizeHttpRequests().requestMatchers("/api/login/**", "/api/token/refresh/**").permitAll();
-        http.authorizeHttpRequests().requestMatchers(GET, "/api/user/**").hasAnyAuthority("ROLE_USER");
-        http.authorizeHttpRequests().requestMatchers(POST, "/api/user/save/**").hasAnyAuthority("ROLE_SUPER_ADMIN");
-        http.authorizeHttpRequests().requestMatchers(POST, "/api/user/block/**").hasAnyAuthority("ROLE_SUPER_ADMIN");
-        http.authorizeHttpRequests().requestMatchers(POST, "/api/user/unblock/**").hasAnyAuthority("ROLE_SUPER_ADMIN");
-        http.authorizeHttpRequests().requestMatchers(POST, "/api/user/delete/**").hasAnyAuthority("ROLE_SUPER_ADMIN");
+        http.authorizeHttpRequests().requestMatchers(GET, "/api/users/**").hasAnyAuthority("ROLE_SUPER_ADMIN");
+        http.authorizeHttpRequests().requestMatchers(POST, "/api/save/**").hasAnyAuthority("ROLE_SUPER_ADMIN");
+        http.authorizeHttpRequests().requestMatchers(POST, "/api/block/**").hasAnyAuthority("ROLE_SUPER_ADMIN");
+        http.authorizeHttpRequests().requestMatchers(POST, "/api/unblock/**").hasAnyAuthority("ROLE_SUPER_ADMIN");
+        http.authorizeHttpRequests().requestMatchers(POST, "/api/delete/**").hasAnyAuthority("ROLE_SUPER_ADMIN");
         http.authorizeHttpRequests().anyRequest().authenticated();
         http.apply(CustomSecurityDetails.customDsl());
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
